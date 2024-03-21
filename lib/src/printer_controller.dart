@@ -21,6 +21,11 @@ class PrinterController {
       return;
     }
 
+    // turn on bluetooth ourself if we can
+    if (Platform.isAndroid) {
+      await FlutterBluePlus.turnOn();
+    }
+
     // handle bluetooth on & off
     // note: if you have permissions issues you will get stuck at BluetoothAdapterState.unauthorized
     _subscription = FlutterBluePlus.adapterState
@@ -56,11 +61,6 @@ class PrinterController {
         }
       }
     });
-
-    // turn on bluetooth ourself if we can
-    if (Platform.isAndroid) {
-      await FlutterBluePlus.turnOn();
-    }
   }
 
   void cancelBluetoothPrinter() {
