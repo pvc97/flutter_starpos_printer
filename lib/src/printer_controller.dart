@@ -65,5 +65,6 @@ class PrinterController {
 
   void cancelBluetoothPrinter() {
     _subscription?.cancel();
+    _subscription = null;
   }
 }
