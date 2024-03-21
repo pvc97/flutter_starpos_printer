@@ -1,6 +1,8 @@
 part of flutter_blue_plus;
 
 class PrinterController {
+  StreamSubscription<BluetoothAdapterState>? _subscription;
+
   Future<void> initBluetoothPrinter({
     Function(BluetoothDevice)? onSuccess,
     Function(String)? onFailure,
@@ -21,8 +23,9 @@ class PrinterController {
 
     // handle bluetooth on & off
     // note: if you have permissions issues you will get stuck at BluetoothAdapterState.unauthorized
-    FlutterBluePlus.adapterState.listen((BluetoothAdapterState state) async {
-      print('--> bluetooth adapter state = ${state}');
+    _subscription = FlutterBluePlus.adapterState
+        .listen((BluetoothAdapterState state) async {
+      print('--> bluetooth adapter state = $state');
       if (state == BluetoothAdapterState.on) {
         // usually start scanning, connecting, etc
 
@@ -58,5 +61,9 @@ class PrinterController {
     if (Platform.isAndroid) {
       await FlutterBluePlus.turnOn();
     }
+  }
+
+  void cancelBluetoothPrinter() {
+    _subscription?.cancel();
   }
 }
