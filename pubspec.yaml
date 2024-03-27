@@ -17,7 +17,3 @@ flutter:
       android:
         package: vn.starposvietnam.bluetooth_printer
         pluginClass: FlutterStarPOSPrinterPlugin
-      ios:
-        pluginClass: FlutterStarPOSPrinterPlugin
-      macos:
-        pluginClass: FlutterStarPOSPrinterPlugin
